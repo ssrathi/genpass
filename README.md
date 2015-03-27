@@ -4,8 +4,9 @@
 The passwords consist of [A-Z, a-z, 0-9, @#$%^&?]
 
 <h4>USAGE</h4>
-<b>usage: genpass.py [-h] [-A] [-N] [-S] [-C] [-l PW_LENGTH] [-n NUM_PW]</b>
 ```
+usage: genpass.py [-h] [-A] [-N] [-S] [-C] [-l PW_LENGTH] [-n NUM_PW]
+
 Generate Secure Passwords.
 
 optional arguments:
