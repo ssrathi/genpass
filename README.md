@@ -1,16 +1,19 @@
 # genpass
-<b>Generate secure random passwords of a specified length.</b>
+<b>Generate secure, random and memorable passwords of a specified length.</b>
 
-The passwords consist of [A-Z, a-z, 0-9, @#$%^&?]
+Includes various options to generate different combinations. Use "-h" to view all of them.
+
 
 <h4>USAGE</h4>
 ```
-usage: genpass.py [-h] [-A] [-N] [-S] [-C] [-l PW_LENGTH] [-n NUM_PW]
+usage: genpass.py [-h] [-m] [-A] [-N] [-S] [-C] [-l PW_LENGTH] [-n NUM_PW]
 
 Generate Secure Passwords.
 
 optional arguments:
   -h, --help            show this help message and exit
+  -m, --memorable       memorable passphrase using common words
+                        (http://xkcd.com/936)
   -A, --no-capitalize   do not include CAPITAL letters
   -N, --no-numerals     do not include NUMBERS
   -S, --no-symbols      do not include SYMBOLS
@@ -31,9 +34,17 @@ MX2aMnVCSzEevv4r    VfTRd8?ZwTG02q%Y    ?v$0$lXSJMZVIXJb    8F6vESmc#Zq8$WBa    
 NbcgJkceMbzpP?Wo    YknWbzWmw?XqPaRC    ykBayV?ABL^rM5pR    0^K4Z1zmdlmcLhDK    xS6J5SPs3e%RcgPw
 bRl32I9fxBBq5Trw    vxc%V&MoC82D?QvL    D^n16BnQ$Ptv1UVN    5w%%o#rklpWyysFs    ie2BKXUfPn@fJxsX
 $
-$ python genpass.py -S -n 10
-6TfRRoLYx2wum6BL    xzE7hjOV1YSxTIHO    VVdIQOBXXm8ywTC3    WEcicr8XtyrlPEIK    YoSixAaN8V7KrSDZ
-uvusOXYf3wo6nsBN    hon0LklmjQ1IsBqd    Dg22UQsVsUmzlBVM    AOTKd4vq49NuosiG    ugzbnJA9G46tQdls
+$ python genpass.py -m
+oxnard-anne-pot-herb-stony       ive-drone-am-abase-def           seek-staid-tribe-humus-ghi
+awash-skit-resin-bole-qg         sen-mega-grand-radon-taunt       clean-ks-alter-laugh-autumn
+spill-sod-spiro-joint-dunn       testy-seedy-smoky-epoxy-edict    truck-modal-gf-ibid-kraft
+error-shoe-eaton-bi-warmth       lsi-rd-scalp-utile-ova           howe-mast-above-mercy-triton
+kayo-nf-elton-crept-woozy        kazoo-balky-eater-fiche-miami    darry-beth-chide-juggle-anent
+cr-save-cecil-aa-orono           goer-palsy-april-hogan-booth     veda-bedim-lost-def-rainy
+webb-warmth-peruse-lucia-trio    isn't-bowen-rug-mate-skit        powder-bean-avail-wm-ell
+offend-estes-sway-ave-state      darken-buenos-pew-them-blaze     beirut-torr-scum-these-sulk
+glyph-dg-ijk-rome-edict          evans-denton-inn-toni-spite      octet-osier-zap-slop-prose
+merle-pawn-arena-brooke-gregg    cowman-py-volt-ic-ret            acme-lath-dc-spiro-any$
 $
 $ python genpass.py -S -n 10 -l 24
 uP6i2maa2F3rjI7TWUTZiH2O    zfOfhRuHpjteOoQ9gOIaGyoV    cCm3FX8vTD8Rrzf1TG5hO98f

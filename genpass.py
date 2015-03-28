@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 """
-Generate secure random passwords of a specified length (default = 24).
+Generate secure, random and memorable passwords of a specified length (default = 24).
 
-The passwords consist of [A-Z, a-z, 0-9, $@]
+Includes various options to generate different combinations. Use "-h" to view all of them.
 """
 
 from __future__ import print_function
@@ -20,8 +20,12 @@ DEFAULT_LENGTH = 16
 DEFAULT_COUNT = 30
 MAX_LENGTH = 64
 MAX_COUNT = 1000
+DEFAULT_WORD_FILE = 'words-en.txt'
 
 parser = argparse.ArgumentParser(description='Generate Secure Passwords.')
+parser.add_argument('-m', '--memorable', dest='memorable',
+                    help='memorable passphrase using common words (http://xkcd.com/936)',
+                    action='store_true')
 parser.add_argument('-A', '--no-capitalize', dest='cap',
                     help='do not include CAPITAL letters', action='store_false')
 parser.add_argument('-N', '--no-numerals', dest='num',
@@ -42,7 +46,7 @@ def gen_passwd(length=DEFAULT_LENGTH, capitals=True, numerals=True, symbols=True
     """
     Generate a random password of specified length
 
-    :param length: Length of generate password
+    :param length: Length of generated password
     :param capitals: Include CAPITAL letters in the password
     :param numerals: Include NUMERALS in the password
     :param symbols: Include SYMBOLS in the password
@@ -54,7 +58,7 @@ def gen_passwd(length=DEFAULT_LENGTH, capitals=True, numerals=True, symbols=True
     if numerals:
         chars += string.digits
     if symbols:
-        chars += "@#$%^&?"
+        chars += "@#$%^&?*():;-="
 
     password = []
     for i in xrange(length):
@@ -63,18 +67,28 @@ def gen_passwd(length=DEFAULT_LENGTH, capitals=True, numerals=True, symbols=True
     return "".join(password)
 
 
+def __get_words():
+    words = []
+    try:
+        with open(DEFAULT_WORD_FILE, 'rb') as fd:
+            words = [line.strip() for line in fd.readlines()]
+    except (IOError, OSError):
+        parser.error('%s file is not found. Abort!' % DEFAULT_WORD_FILE)
+    return words
+
+
 def __print_columns(passwords, is_column=1):
     # Print in columns
     spaces = 4  # Space between two passwords
-    length = len(passwords[0]) # All passwords are of the same size
-    print_per_line = (100 / (length + spaces)) if is_column else 1
+    max_length = len(max(passwords, key=len))  # Maximum length of a password
+    print_per_line = (100 / (max_length + spaces)) if is_column else 1
 
     printed = 0
     for pw in passwords:
         print(pw, end='')
         printed += 1
         if printed < print_per_line:
-            print(' ' * spaces, end='')
+            print(' ' * (spaces + (max_length - len(pw))), end='')
         else:
             print('')  # newline
             printed = 0
@@ -83,16 +97,36 @@ def __print_columns(passwords, is_column=1):
         print('')  # Put a newline at the end
 
 
+def gen_passphrase(words, num_words=5):
+    """
+    Generate a memorable passphrase using common words
+
+    :param words: list of words to choose from
+    :param num_words: number of words in each passwords (joined by '-')
+    """
+
+    passphrase = []
+    for i in xrange(num_words):
+        index = random.SystemRandom().randrange(len(words))
+        passphrase.append(words[index])
+    return "-".join(passphrase)
+
+
 def main():
     args = parser.parse_args()
 
     if not 1 <= args.length <= MAX_LENGTH:
         parser.error('Password length must be between 1 to %d' % MAX_LENGTH)
     if not 1 <= args.count <= MAX_COUNT:
-        parser.error('Number of passwords  must be between 1 to %d' % MAX_COUNT)
+        parser.error('Number of passwords must be between 1 to %d' % MAX_COUNT)
 
-    passwords = [gen_passwd(args.length, args.cap, args.num, args.sym)
-                 for i in xrange(args.count)]
+    if args.memorable:
+        words = __get_words()
+        passwords = [gen_passphrase(words) for i in xrange(args.count)]
+    else:
+        passwords = [gen_passwd(args.length, args.cap, args.num, args.sym)
+                     for i in xrange(args.count)]
+
     __print_columns(passwords, args.column)
     return 0
 
