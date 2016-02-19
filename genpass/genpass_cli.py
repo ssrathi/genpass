@@ -20,7 +20,8 @@ DEFAULT_LENGTH = 16
 DEFAULT_COUNT = 30
 MAX_LENGTH = 64
 MAX_COUNT = 1000
-DEFAULT_WORD_FILE = 'words-en.txt'
+DEFAULT_WORD_FILE =  os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                  'words', 'words-en.txt')
 
 parser = argparse.ArgumentParser(description='Generate Secure Passwords.')
 parser.add_argument('-m', '--memorable', dest='memorable',
