@@ -5,17 +5,17 @@ Includes various options to generate different combinations. Use "-h" to view al
 
 <h4>Installation</h4>
 genpass can be installed using pip:
-```
+<code>
 pip install genpassword
-```
+</code>
 
 or manually:
-```
+<code>
 python setup.py install
-```
+</code>
 
 <h4>USAGE</h4>
-```
+<code>
 usage: genpassword.py [-h] [-m] [-A] [-N] [-S] [-C] [-l PW_LENGTH] [-n NUM_PW]
 
 Generate Secure Passwords.
@@ -32,10 +32,10 @@ optional arguments:
                         length of each password (1-64, default=16)
   -n NUM_PW, --num-passwords NUM_PW
                         total number of passwords (1-1000, default=30)
-```
+</code>
 
 <h4>SAMPLE OUTPUT</h4>
-```
+<code>
 $ python genpassword.py
 B3dr#%UUYlMGP4jU    tv0wRTL7ny7eumOB    Juf7GmlIk9j7iCuF    xFF4Sa$GX%EocLbH    Wy#zVoSWWYyTm3I8
 FxOCu1C7%OzPdkK6    M&^rPRxAsczlM$ZL    XsSjbEmFI3Q1Wfml    0ioR#0QIwVnT9a?J    mkI8FFtL%HYfav^#
@@ -76,4 +76,4 @@ LKF?e&xUd2ZH1t06
 W?gC9TmU2FIgnUla
 &2sRmd0cUn%MAzUj
 iSBOCFDhYnMNGBtN
-```
+</code>
